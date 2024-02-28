@@ -6,6 +6,8 @@
 #include <pthread.h>
 
 #define A2D_FILE_VOLTAGE1  "/sys/bus/iio/devices/iio:device0/in_voltage1_raw" 
+#define A2D_VOLTAGE_REF_V 1.8
+#define A2D_MAX_READING 4095
 
 static bool shutdown = false;
 static int temperatureReading = 0;
@@ -40,15 +42,20 @@ int getTemperatureReading() {
     return temperatureReading; 
 }
 
-double getCelcius(){
-    return temperatureReading;
+static double getTemperatureVoltage() { 
+    return (temperatureReading * A2D_VOLTAGE_REF_V) / A2D_MAX_READING; 
+}
+
+double getCelciusTemperature(){
+    double temperatureVoltage = getTemperatureVoltage();
+    return (temperatureVoltage * 1000 - 500)/10;
 }
 
 void createTemperatureSensorThread() {
     pthread_create(&temperatureSensorThread, NULL, updateTemperatureReading, NULL);
 }
 
-void shutdownLightSensor() { 
+void shutdownTemperatureSensor() { 
     shutdown = true; 
     pthread_join(temperatureSensorThread, NULL);
 }

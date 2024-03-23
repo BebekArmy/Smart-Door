@@ -5,7 +5,9 @@ file(GLOB MY_SOURCES "src/*.c")
 add_executable(smart_door ${MY_SOURCES})
 
 # Make use of the HAL library
-target_link_libraries(smart_door LINK_PRIVATE hal)
+find_package(Threads REQUIRED)
+target_link_libraries(smart_door LINK_PRIVATE hal Threads::Threads)
+
 
 # Copy executable to final location (change `hello_world` to project name as needed)
 add_custom_command(TARGET smart_door POST_BUILD 

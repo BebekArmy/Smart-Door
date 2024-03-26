@@ -18,7 +18,7 @@ function handleCommand(socket) {
 
 		// Info for connecting to the local process via UDP
 		var PORT = 12345;
-		var HOST = '192.168.7.1';
+		var HOST = '192.168.7.2';
 		var buffer = new Buffer(data);
 
 		var client = dgram.createSocket('udp4');

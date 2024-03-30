@@ -1,3 +1,8 @@
 {
-    "cmake.sourceDirectory": "/home/felix/cmpt433/work/Smart Door/beagle_bone"
+    "cmake.sourceDirectory": "/home/ryan/cmpt433/work/project/Smart-Door/beagle_bone",
+    "files.associations": {
+        "stdio.h": "c",
+        "errno.h": "c",
+        "general_command.h": "c"
+    }
 }

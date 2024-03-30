@@ -61,3 +61,66 @@ void writeToFile(const char *file, const char *value) {
     fprintf(f, "%s", value);
     fclose(f);
 }
+
+void readFromFileToScreen(char *fileName)
+{
+    FILE *pFile = fopen(fileName, "r");
+    if (pFile == NULL)
+    {
+        printf("ERROR: Unable to open file (%s) for read\n", fileName);
+        exit(-1);
+    }
+    // Read string (line)
+    const int MAX_LENGTH = 1024;
+    char buff[MAX_LENGTH];
+    fgets(buff, MAX_LENGTH, pFile);
+    // Close
+    fclose(pFile);
+    printf("Read: '%s'\n", buff);
+}
+
+long long getTimeInNs(void)
+{
+    struct timespec spec;
+    clock_gettime(CLOCK_REALTIME, &spec);
+    long long seconds = spec.tv_sec;
+    long long nanoSeconds = spec.tv_nsec;
+    long long total_nanoSeconds = seconds * 1000000000 + nanoSeconds;
+    return total_nanoSeconds;
+}
+
+int getDataFromFile(char *fileName)
+{
+    FILE *pFile = fopen(fileName, "r");
+    if (pFile == NULL)
+    {
+        printf("ERROR: Unable to open file (%s) for read\n", fileName);
+        exit(-1);
+    }
+    // Read string (line)
+    const int MAX_LENGTH = 1024;
+    char buff[MAX_LENGTH];
+    fgets(buff, MAX_LENGTH, pFile);
+    // Close
+    fclose(pFile);
+    return buff[0];
+}
+
+int read_value_from_file(const char *file_path) {
+    FILE *file = fopen(file_path, "r");
+    if (file == NULL) {
+        perror("Error opening file for reading");
+        exit(EXIT_FAILURE);
+    }
+
+    int value;
+    if (fscanf(file, "%d", &value) != 1) {
+        perror("Error reading from file");
+        fclose(file);
+        exit(EXIT_FAILURE);
+    }
+
+    fclose(file);
+
+    return value;
+}

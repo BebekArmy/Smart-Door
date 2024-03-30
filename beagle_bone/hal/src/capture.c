@@ -58,7 +58,7 @@ static int              force_format = 0;
 static int              frame_count = 100;
 
 #define PORT_T 3000
-#define RPORT_T 1234 //Port for NodeJS
+#define RPORT_T 12345 //Port for NodeJS
 static struct sockaddr_in sinT;
 static struct sockaddr_in sinRemoteT;
 static int socketDescriptorT;

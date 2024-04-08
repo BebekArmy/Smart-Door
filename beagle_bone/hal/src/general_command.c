@@ -62,6 +62,7 @@ void writeToFile(const char *file, const char *value) {
     fclose(f);
 }
 
+<<<<<<< HEAD
 void sendEmail(const char *subject, const char *body, const char *to) {
     char command[1024];
     sprintf(command, "echo \"%s\" | mail -s \"%s\" %s", body, subject, to);

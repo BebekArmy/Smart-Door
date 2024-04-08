@@ -9,5 +9,6 @@ long long getTimeInMs(void);
 void sleepForMs(long long delayInMs);
 void runCommand(char* command);
 void writeToFile(const char *file, const char *value);
+void sendEmail(const char *subject, const char *body, const char *to);
 
 #endif

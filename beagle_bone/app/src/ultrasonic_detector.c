@@ -33,12 +33,16 @@ void clearEmails() {
 }
 
 void sendWarningEmail() {
-    //send warning to emails in the list
+    //get current time and compose the warning message using the current time
+    time_t t = time(NULL);
+    struct tm tm = *localtime(&t);
+    char message[100];
+    sprintf(message, "Someone is at your door at %d-%d-%d %d:%d:%d", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
     for (int i = 0; i < EMAIL_COUNT; i++)
     {
         if (strlen(emails[i]) != 0)
         {
-            sendEmail("Smart Door Warning", "Someone is at your door", emails[i]);
+            sendEmail("Smart Door Warning", message, emails[i]);
         }
     }
     

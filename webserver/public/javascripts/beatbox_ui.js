@@ -1,5 +1,7 @@
 var socket = io.connect();
 var replyTimeoutDuration;
+var communicationTimeout;
+var inputCount = 0;
 
 function showErrorBox() {
     replyTimeoutDuration = setTimeout(function() {
@@ -7,41 +9,52 @@ function showErrorBox() {
     }, 100);
 }
 
+function resetCommunicationTimeout() {
+    clearTimeout(communicationTimeout);
+    communicationTimeout = setTimeout(() => {
+        clearInputs();
+    }, 1000);
+}
 
+
+function appendInput(event) {
+    var input = document.getElementById("userInput").value;
+
+    if (input !== '' && inputCount < 5) {
+        var currentContent = document.getElementById("displayArea").innerHTML;
+        document.getElementById("displayArea").innerHTML = currentContent + input + '<br>';
+
+        socket.emit('message', input);
+
+        document.getElementById("userInput").value = '';
+        inputCount++;
+    }
+}
+
+function clearInputs() {
+    document.getElementById("displayArea").innerHTML = '';
+    inputCount = 0;
+
+    socket.emit('message', 'clear');
+}
+  
 
 $(document).ready(function() {
-    $('#modeNone').click(function() {
-        socket.emit('message', 'mode_none');
+    clearInputs();
+    
+    $('#lock').click(function() {
+        socket.emit('message', 'lock');
     });
-    $('#modeRock1').click(function() {
-        socket.emit('message', 'mode_one');
+    $('#unlock').click(function() {
+        socket.emit('message', 'unlock');
     });
-    $('#modeRock2').click(function() {
-        socket.emit('message', 'mode_two');
+    $('#celcius').click(function() {
+        socket.emit('message', 'celcius');
+        $('#temp_unit').text("C");
     });
-    $('#volumeDown').click(function() {
-        socket.emit('message', 'volume_down');
-    });
-    $('#volumeUp').click(function() {
-        socket.emit('message', 'volume_up');
-    });
-    $('#bpmDown').click(function() {
-        socket.emit('message', 'bpm_down');
-    });
-    $('#bpmUp').click(function() {
-        socket.emit('message', 'bpm_up');
-    });
-    $('#hiHatSound').click(function() {
-        socket.emit('message', 'hi_hat');
-    });
-    $('#snareSound').click(function() {
-        socket.emit('message', 'snare');
-    });
-    $('#bassSound').click(function() {
-        socket.emit('message', 'bass');
-    });
-    $('#stop').click(function() {
-        socket.emit('message', 'stop');
+    $('#fahrenheit').click(function() {
+        socket.emit('message', 'fahrenheit');
+        $('#temp_unit').text("F");
     });
 
     setInterval(function() {
@@ -54,26 +67,13 @@ $(document).ready(function() {
         console.log('Received command: ' + command);
         $('#error-box').hide();
         clearTimeout(replyTimeoutDuration);
+        resetCommunicationTimeout();
 
-        var bpm = command.match(/BPM:(\d+)/)[1];
-        var volume = command.match(/Volume:(\d+)/)[1];
-        var pattern = command.match(/Pattern:(\d+)/)[1];
-        var uptime = command.match(/Hours: (\d+) Minutes: (\d+) Seconds: (\d+)/);
+        var temperature = command.split("\n")[0].split(":")[1];
+        var lockstatus = command.split("\n")[1].split(":")[1];
         
-        bpmid.value = bpm;
-        volumeid.value = volume;
-        $('#modeid').text(pattern);
-        if (pattern == 0) {
-            $('#modeid').text("None");
-        }
-        else if (pattern == 1) {
-            $('#modeid').text("Rock 1");
-        }
-        else if (pattern == 2) {
-            $('#modeid').text("Rock 2");
-        }
-
-        $('#status').text(uptime[1] + ":" + uptime[2] + ":" + uptime[3] + " (H:M:S)");
+        $('#temp_value').text(temperature);
+        $('#modeid').text(lockstatus);
     });
     socket.on('canvas', function(data) {
         console.log('Received canvas data');

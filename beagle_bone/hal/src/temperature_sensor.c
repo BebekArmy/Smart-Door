@@ -51,6 +51,10 @@ double getCelciusTemperature(){
     return (temperatureVoltage * 1000 - 500)/10;
 }
 
+double getFarhenheitTemperature(){
+    return (getCelciusTemperature() * 9/5) + 32;
+}
+
 void createTemperatureSensorThread() {
     pthread_create(&temperatureSensorThread, NULL, updateTemperatureReading, NULL);
 }

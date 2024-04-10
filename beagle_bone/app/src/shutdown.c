@@ -9,6 +9,7 @@
 #include "hal/ultrasonic.h"
 #include "ultrasonic_detector.h"
 #include "button_locker.h"
+#include "udp.h"
 
 #include <pthread.h>
 #include <string.h>
@@ -28,14 +29,17 @@ void createThreads()
 
     // create_button_thread();
     // createUltrasonicThread();
-    // createUltrasonicDetectorThread();
+     createUltrasonicDetectorThread();
     // createButtonLockerThread();
 
-    openConnectionT();
-    open_device();
-    init_device();
-    start_capturing();
-    mainloop();
+    // openConnectionT();
+    // open_device();
+    // init_device();
+    // start_capturing();
+    // mainloop();
+
+    createUDPThread();
+
 }
 
 void joinThreads()
@@ -52,11 +56,13 @@ void joinThreads()
     // joinUltrasonicThread();
     // joinUltrasonicDetectorThread();
 
-    stop_capturing();
-    uninit_device();
-    close_device();
-    fprintf(stderr, "\n");
-    closeConnectionT();
+    // stop_capturing();
+    // uninit_device();
+    // close_device();
+    // fprintf(stderr, "\n");
+    // closeConnectionT();
+
+    joinUDPThread();
 }
 
 void waitShutdown()

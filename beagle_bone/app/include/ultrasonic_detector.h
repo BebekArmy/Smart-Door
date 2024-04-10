@@ -11,6 +11,8 @@
 #include <time.h>
 #include <stdbool.h>
 
+void addEmail(const char *email);
+void clearEmails();
 
 void initializeUltrasonicDetector();
 void createUltrasonicDetectorThread();

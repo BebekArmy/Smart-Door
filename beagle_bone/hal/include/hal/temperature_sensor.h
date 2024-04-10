@@ -10,6 +10,7 @@ in its digital form (e.g. 4095) or real world analog form (e.g. 1.2V).
 
 int getTemperatureReading();
 double getCelciusTemperature();
+double getFarhenheitTemperature();
 void createTemperatureSensorThread();
 void shutdownTemperatureSensor();
 

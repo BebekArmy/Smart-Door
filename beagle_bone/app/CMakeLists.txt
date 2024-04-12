@@ -13,5 +13,5 @@ target_link_libraries(smart_door LINK_PRIVATE hal Threads::Threads)
 add_custom_command(TARGET smart_door POST_BUILD 
   COMMAND "${CMAKE_COMMAND}" -E copy 
      "$<TARGET_FILE:smart_door>"
-     "~/cmpt433/public/Final Project/smart_door" 
+     "~/cmpt433/public/myApps/smart_door_ryan1" 
   COMMENT "Copying ARM executable to public NFS directory")

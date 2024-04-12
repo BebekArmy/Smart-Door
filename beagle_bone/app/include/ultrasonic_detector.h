@@ -1,6 +1,12 @@
 #ifndef _ULTRASONIC_DETECTOR_H_
 #define _ULTRASONIC_DETECTOR_H_
 
+/* Module to initialize and cleanup ultrasonic detector thread. 
+This allows the ultrasonic distance sensor to trigger sending alert emails to emails that the user
+inputted in the web server when detecting within a certain distance.
+
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>

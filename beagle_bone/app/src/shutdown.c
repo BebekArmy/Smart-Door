@@ -5,6 +5,7 @@
 #include "hal/button.h"
 #include "hal/servo.h"
 #include "hal/led.h"
+#include "hal/display.h"
 
 #include "hal/ultrasonic.h"
 #include "ultrasonic_detector.h"
@@ -21,48 +22,50 @@ pthread_cond_t shutdownCond = PTHREAD_COND_INITIALIZER;
 
 void createThreads()
 {
-    // createTemperatureSensorThread();
+    initialize_led();
+    initialize_button();
+    initializeUltrasonic();
+    initializeServo();
+    initialize_temperature_sensor();
+    //initializeDisplay();
 
-    // initialize_led();
-    // initialize_button();
-    // initializeUltrasonic();
-
-    // create_button_thread();
-    // createUltrasonicThread();
-     createUltrasonicDetectorThread();
-    // createButtonLockerThread();
-
-    // openConnectionT();
-    // open_device();
-    // init_device();
-    // start_capturing();
-    // mainloop();
-
+    create_button_thread();
+    createUltrasonicThread();
+    createUltrasonicDetectorThread();
+    createButtonLockerThread();
+    //createDisplayThread();
+    createTemperatureSensorThread();
     createUDPThread();
 
+    openConnectionT();
+    open_device();
+    init_device();
+    start_capturing();
+    mainloop();
 }
 
 void joinThreads()
 {
-    // shutdownTemperatureSensor();
 
-    // shutdown_button();
-    // shutdownButtonLocker();
-    // shutdownUltrasonic();
-    // shutdownUltrasonicDetector();
+    shutdown_button();
+    shutdownButtonLocker();
+    shutdownUltrasonic();
+    shutdownUltrasonicDetector();
+    shutdownTemperatureSensor();
+    shutdownDisplay();
 
-    // join_button_thread();
-    // joinButtonLockerThread();
-    // joinUltrasonicThread();
-    // joinUltrasonicDetectorThread();
-
-    // stop_capturing();
-    // uninit_device();
-    // close_device();
-    // fprintf(stderr, "\n");
-    // closeConnectionT();
-
+    join_button_thread();
+    joinButtonLockerThread();
+    joinUltrasonicThread();
+    joinUltrasonicDetectorThread();
     joinUDPThread();
+    joinDisplayThread();
+
+    stop_capturing();
+    uninit_device();
+    close_device();
+    fprintf(stderr, "\n");
+    closeConnectionT();
 }
 
 void waitShutdown()

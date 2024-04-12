@@ -1,6 +1,7 @@
 #include "udp.h"
 #include "hal/temperature_sensor.h"
 #include "hal/servo.h"
+#include "hal/led.h"
 #include "ultrasonic_detector.h"
 #include "shutdown.h"
 
@@ -20,7 +21,6 @@
 static pthread_t UDPThread;
 
 static char *lockStatus;
-static bool celciusUnit = true;
 
 
 void *displayUDPcommands(void *args)
@@ -66,22 +66,25 @@ void *displayUDPcommands(void *args)
         // change mode to "mode_none"
         if (strncmp(messageRx, "lock", strlen("lock")) == 0)
         {
-            printf("Locking\n");
+            turn_on_led();
+            lockServo();
+            
         }
 
         else if (strncmp(messageRx, "unlock", strlen("unlock")) == 0)
         {
-            printf("Unlocking\n");
+            turn_off_led();
+            unlockServo();
         }
 
         else if (strncmp(messageRx, "celcius", strlen("celcius")) == 0)
         {
-            celciusUnit = true;
+            setUnitCelsius(true);
         }
 
         else if (strncmp(messageRx, "fahrenheit", strlen("fahrenheit")) == 0)
         {
-            celciusUnit = false;
+            setUnitCelsius(false);
         }
         else if (strncmp(messageRx, "clear", strlen("clear")) == 0)
         {
@@ -100,7 +103,7 @@ void *displayUDPcommands(void *args)
 
             double temperature;
 
-            if (celciusUnit == true)
+            if (getUnitCelsius() == true)
                 temperature = getCelciusTemperature();
             else
                 temperature = getFarhenheitTemperature();

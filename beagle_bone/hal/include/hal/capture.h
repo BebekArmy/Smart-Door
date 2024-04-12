@@ -2,10 +2,10 @@
 #define _CAPTURE_H_
 
 // Camera Streaming
+// Source: https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt433/links/files/2022-student-howtos/StreamingWebcamFromBeagleBoneToNodeJSServer.pdf
 
 #include <stdint.h>
 
-// Camera Streaming Functions from capture.c
 void openConnectionT(void);
 int sendResponseT(const void *str, int size);
 void closeConnectionT(void);

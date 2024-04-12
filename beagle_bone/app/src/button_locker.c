@@ -39,11 +39,6 @@ static void *updateButtonLocker(void *args)
     return NULL;
 }
 
-void initializeButtonLocker()
-{
-    return;
-}
-
 void createButtonLockerThread()
 {
     pthread_create(&buttonLockerThread, NULL, updateButtonLocker, NULL);

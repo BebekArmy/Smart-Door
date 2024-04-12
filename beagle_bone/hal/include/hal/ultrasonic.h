@@ -1,6 +1,10 @@
 #ifndef _ULTRASONIC_H_
 #define _ULTRASONIC_H_
 
+/* Module to initialize and cleanup the ultrasonic distance sensor thread.
+
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>

@@ -37,12 +37,12 @@ void sendWarningEmail() {
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
     char message[100];
-    sprintf(message, "Someone is at your door at %d-%d-%d %d:%d:%d", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
+    sprintf(message, "Someone was at your door at %d-%d-%d %d:%d.", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min);
     for (int i = 0; i < EMAIL_COUNT; i++)
     {
         if (strlen(emails[i]) != 0)
         {
-            sendEmail("Smart Door Warning", message, emails[i]);
+            sendEmail("Smart Door Alert", message, emails[i]);
         }
     }
     
@@ -57,18 +57,16 @@ static void *updateUltrasonicDetector(void *args)
     while (!shutdown)
     {
 
-        // distance_in_cm = get_distance_cm();
-        // if (distance_in_cm < 50)
-        // {
-        //     printf("Motion Detected\n");
-        // }
-        // else
-        // {
-        //     printf("Distance: %.1Lfcm\n", distance_in_cm);
-        // }
-        // sleepForMs(10);
-        //sendWarningEmail();
-        sleepForMs(5000);
+        distance_in_cm = get_distance_cm();
+        printf("%Lf\n", distance_in_cm);
+        if (distance_in_cm < 50)
+        {
+            //sendWarningEmail();
+            //sleepForMs(30000);
+        }
+        
+        sleepForMs(10);
+        
     }
     return NULL;
 }

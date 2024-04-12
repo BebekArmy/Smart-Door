@@ -1,18 +1,21 @@
 #ifndef _TEMPERATURE_SENSOR_H_
 #define _TEMPERATURE_SENSOR_H_
 
-/* Module to initialize and cleanup the light sensor thread.
-Supports updating (repeatedly reading in_voltage1_raw) and getting a voltage from the light sensor
-in its digital form (e.g. 4095) or real world analog form (e.g. 1.2V).
+/* Module to initialize and cleanup the temperature sensor thread.
+
 */
 
 #include <stdint.h>
+#include <stdbool.h>
 
+void initialize_temperature_sensor();
 int getTemperatureReading();
 double getCelciusTemperature();
 double getFarhenheitTemperature();
 void createTemperatureSensorThread();
 void shutdownTemperatureSensor();
+bool getUnitCelsius();
+void setUnitCelsius(bool a);
 
 
 #endif

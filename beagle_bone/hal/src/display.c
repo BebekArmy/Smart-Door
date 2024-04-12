@@ -63,8 +63,8 @@ void initializeDisplay(){
     runCommand("config-pin P9_18 i2c");
     runCommand("config-pin P9_17 i2c");
 
-    writeToFile(GPIO61_export, "61");
-    writeToFile(GPIO44_export, "44");
+    //writeToFile(GPIO61_export, "61");
+    //writeToFile(GPIO44_export, "44");
 
     writeToFile(GPIO61_direction, "out");
     writeToFile(GPIO44_direction, "out");

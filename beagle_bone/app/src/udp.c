@@ -2,6 +2,7 @@
 #include "hal/temperature_sensor.h"
 #include "hal/servo.h"
 #include "hal/led.h"
+#include "hal/display.h"
 #include "ultrasonic_detector.h"
 #include "shutdown.h"
 
@@ -103,13 +104,19 @@ void *displayUDPcommands(void *args)
 
             double temperature;
 
-            if (getUnitCelsius() == true)
-                temperature = getCelciusTemperature();
-            else
-                temperature = getFarhenheitTemperature();
-
+            if (getUnitCelsius() == true){
 
             
+                temperature = getCelciusTemperature();
+
+            }
+                
+            else{
+                temperature = getFarhenheitTemperature();
+            }
+
+            setDisplay((int)temperature);
+
             char messageTx[MSG_MAX_LEN];
             sprintf(messageTx, "Temperature:%.1f\nLock Status:%s\n", temperature, lockStatus);
             sin_len = sizeof(sinRemote);

@@ -58,22 +58,17 @@ static void *updateUltrasonicDetector(void *args)
     {
 
         distance_in_cm = get_distance_cm();
-        printf("%Lf\n", distance_in_cm);
+
         if (distance_in_cm < 50)
         {
-            //sendWarningEmail();
-            //sleepForMs(30000);
+            sendWarningEmail();
+            sleepForMs(60000);
         }
         
         sleepForMs(10);
         
     }
     return NULL;
-}
-
-void initializeUltrasonicDetector()
-{
-    return;
 }
 
 void createUltrasonicDetectorThread()

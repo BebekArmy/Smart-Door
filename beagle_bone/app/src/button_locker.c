@@ -9,7 +9,7 @@
 static bool shutdown = false;
 pthread_t buttonLockerThread;
 
-static long double distance_in_cm = 0;
+//static long double distance_in_cm = 0;
 
 static void *updateButtonLocker(void *args)
 {

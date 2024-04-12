@@ -27,13 +27,13 @@ void createThreads()
     initializeUltrasonic();
     initializeServo();
     initialize_temperature_sensor();
-    //initializeDisplay();
+    initializeDisplay();
 
     create_button_thread();
     createUltrasonicThread();
     createUltrasonicDetectorThread();
     createButtonLockerThread();
-    //createDisplayThread();
+    createDisplayThread();
     createTemperatureSensorThread();
     createUDPThread();
 

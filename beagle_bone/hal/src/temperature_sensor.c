@@ -67,11 +67,11 @@ void *updateTemperatureReading(void *args)
 
         if (celciusUnit)
         {
-            setDisplay(getCelciusTemperature());
+            setDisplay((int)getCelciusTemperature());
         }
         else
         {
-            setDisplay(getFarhenheitTemperature());
+            setDisplay((int)getFarhenheitTemperature());
         }
         sleepForMs(5000);
     }

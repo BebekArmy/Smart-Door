@@ -17,14 +17,14 @@
 #include <pthread.h>
 
 #define allowInputTrig "config-pin p9.15 gpio" // GPIO 9_15, gpio48
-#define allowInputEcho "config-pin p9.17 gpio" // GPIO 9_17, gpio5
+#define allowInputEcho "config-pin p9.42 gpio" // GPIO 9_42, gpio7
 
 #define A1raw_value "/sys/bus/iio/devices/iio:device0/in_voltage1_raw"
 #define Trig_direction "/sys/class/gpio/gpio48/direction"
-#define Echo_direction "/sys/class/gpio/gpio5/direction"
-#define Echo_active_low "/sys/class/gpio/gpio5/active_low"
+#define Echo_direction "/sys/class/gpio/gpio7/direction"
+#define Echo_active_low "/sys/class/gpio/gpio7/active_low"
 #define Trig_value "/sys/class/gpio/gpio48/value"
-#define Echo_value "/sys/class/gpio/gpio5/value"
+#define Echo_value "/sys/class/gpio/gpio7/value"
 
 void initializeUltrasonic();
 void createUltrasonicThread();

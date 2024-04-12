@@ -5,8 +5,6 @@
 static bool shutdown = false;
 pthread_t ultrasonicThread;
 
-static long double distance_in_cm = 0;
-
 long double get_distance_cm()
 {
     long double start_time = 0;
@@ -28,7 +26,6 @@ long double get_distance_cm()
     {
         distance_in_cm = 0;
     }
-    // printf("distance: %.1Lf cm \n", distance_in_cm);
 
     return distance_in_cm;
 }

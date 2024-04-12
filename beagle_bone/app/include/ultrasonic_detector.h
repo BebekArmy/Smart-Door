@@ -20,7 +20,6 @@ inputted in the web server when detecting within a certain distance.
 void addEmail(const char *email);
 void clearEmails();
 
-void initializeUltrasonicDetector();
 void createUltrasonicDetectorThread();
 void shutdownUltrasonicDetector();
 void joinUltrasonicDetectorThread();

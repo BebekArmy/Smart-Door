@@ -2,7 +2,7 @@
 #define _ULTRASONIC_H_
 
 /* Module to initialize and cleanup the ultrasonic distance sensor thread.
-
+Source: https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt433/links/files/2022-student-howtos-ensc351/UltrasonicSensorHCSR04.pdf
 */
 
 #include <stdio.h>
